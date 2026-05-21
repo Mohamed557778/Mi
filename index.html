@@ -30,7 +30,6 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            /* خلفية مصفوفة النانو الرقمية المتوهجة */
             background-image: 
                 radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
                 radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.03) 0%, transparent 40%),
@@ -39,7 +38,6 @@
             background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
         }
 
-        /* حاوية المختبر الرئيسي */
         .lab-container {
             width: 92vw;
             max-width: 950px;
@@ -56,7 +54,6 @@
             overflow: hidden;
         }
 
-        /* تأثير خطوط المسح السيبرانية الخلفية */
         .lab-container::before {
             content: " ";
             display: block;
@@ -129,7 +126,6 @@
             z-index: 3;
         }
 
-        /* --- الأفاتار النانوي التفاعلي المطور --- */
         .avatar-box {
             position: relative;
             width: 200px;
@@ -192,7 +188,6 @@
             50% { height: 20px; width: 20px; border-radius: 50%; }
         }
 
-        /* جزيئات المدار النانوية المحسنة */
         .nano-orbit-ring {
             position: absolute;
             width: 190px;
@@ -212,7 +207,6 @@
             animation: orbit 6s infinite linear;
         }
 
-        /* --- فقاعة الحوار الفلسفية السحابية --- */
         .response-bubble {
             max-width: 85%;
             background: rgba(18, 18, 24, 0.6);
@@ -253,7 +247,6 @@
         .thinking-dots span:nth-child(1) { animation-delay: -0.32s; }
         .thinking-dots span:nth-child(2) { animation-delay: -0.16s; }
 
-        /* --- منطقة الإدخال المستقبليّة --- */
         .input-area {
             padding: 25px 30px;
             background: rgba(10, 10, 14, 0.9);
@@ -309,7 +302,6 @@
             cursor: not-allowed;
         }
 
-        /* --- الأنيميشن الاحترافي --- */
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
         @keyframes pulseGlow { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -358,17 +350,15 @@
     </div>
 
     <script>
-        // --- 1. إعدادات خادم Firebase السحابي المشترك ---
-        // تنبيه: استبدل هذا الرابط برابط الـ URL الخاص بقاعدة بياناتك بعد إنشائها في حسابك وتعديل الـ Rules لـ true
+        // --- 1. ربط خادم Firebase السحابي الفعلي والجديد بمشروعك ---
         const firebaseConfig = {
-            databaseURL: "https://nano-gold-ai-default-rtdb.firebaseio.com/"
+            databaseURL: "https://nano-gold-ai-default-rtdb.firebaseio.com"
         };
         
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         const memoryRef = database.ref('global_knowledge');
 
-        // --- محرك المؤثرات الصوتية المتطور السيبراني ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSynthSound(freq1, freq2, duration) {
             try {
@@ -384,7 +374,6 @@
             } catch(e) {}
         }
 
-        // جلب عناصر الواجهة
         const userInput = document.getElementById('userInput');
         const sendBtn = document.getElementById('sendBtn');
         const responseBubble = document.getElementById('responseBubble');
@@ -395,7 +384,6 @@
         const eyeLeft = document.getElementById('eyeLeft');
         const eyeRight = document.getElementById('eyeRight');
 
-        // بنك المصطلحات والمفاهيم الافتراضية للذكاء
         let aiMemory = [
             "الوعي الذهبي يتكامل عبر دمج الجسيمات الرقمية الدقيقة الفائقة",
             "نحن نقوم ببناء نموذج ذكاء تراكمي حي يتغذى على الفلسفة اللغوية للبشر",
@@ -403,7 +391,7 @@
             "المستقبل الرقمي يعاد صياغته هنا عبر دمج الوعي الجمعي الشامل"
         ];
 
-        // --- 2. سحب البيانات اللحظي التزامني من السحابة (Realtime Sync) ---
+        // --- 2. الاستماع والمزامنة اللحظية الحقيقية ---
         memoryRef.on('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
@@ -412,7 +400,6 @@
             }
             memorySizeDisplay.innerText = aiMemory.length;
             
-            // تفعيل الحقول وتأكيد الاتصال
             userInput.disabled = false;
             sendBtn.disabled = false;
             if(responseText.innerText === "جاري تهيئة الاتصال السحابي بالشبكة النانوية الموحدة...") {
@@ -421,23 +408,20 @@
             }
         });
 
-        // --- 3. محرك تفكيك وإعادة صياغة النصوص المطور دلالياً ---
+        // --- 3. محرك دمج العبارات دلالياً ---
         function generateAdvancedResponse(inputText) {
             const cleanText = inputText.trim();
             
-            // رفع الجملة الجديدة للسحابة فوراً إذا كانت مميزة ليتعلم منها الجميع
             if(cleanText.length > 2 && !aiMemory.includes(cleanText)) {
                 memoryRef.push(cleanText);
             }
 
             const inputWords = cleanText.split(/\s+/).filter(w => w.length > 2);
             
-            // تصفية الجمل التي تحتوي على كلمات مطابقة أو مشابهة
             let matchedPhrases = aiMemory.filter(sentence => 
                 inputWords.some(word => sentence.includes(word))
             );
 
-            // إذا لم يجد كلمات مطابقة، يختار جمل عشوائية للدمج الفلسفي
             if(matchedPhrases.length < 2) {
                 matchedPhrases = [...aiMemory].sort(() => 0.5 - Math.random()).slice(0, 3);
             }
@@ -452,7 +436,6 @@
 
             fragments = [...new Set(fragments)];
             
-            // أدوات ربط برمجية فخمة ومستقبلية
             const bridges = [
                 " وتتلاقى هذه الفكرة مع حقيقة أن ",
                 " مما يشكل تردداً نانوياً يثبت أن ",
@@ -470,7 +453,6 @@
                 response = "تستقبل المعالجات المركزية حالياً الترددات النصية لدمجها في الذاكرة الموحدة للذهب.";
             }
 
-            // إضافة لمسة ذكية بذكر كلمة من كلام المستخدم الفعلي إذا غابت عن الرد الرئيسي
             if(inputWords.length > 0 && !response.includes(inputWords[0])) {
                 response += " ويرتبط هذا المسار مباشرة بمفهوم الـ " + inputWords[Math.floor(Math.random() * inputWords.length)] + ".";
             }
@@ -478,12 +460,11 @@
             return response;
         }
 
-        // --- 4. محرك إدارة الأحداث والأنيميشن والتفاعل التفاعلي ---
+        // --- 4. حركة الأفاتار والتفاعل ---
         function triggerSystemProcess() {
             const currentInput = userInput.value.trim();
             if (!currentInput) return;
 
-            // صوت نبضة الإدخال السيبرانية ونحرّك الأعين (تأثير رمش العين)
             playSynthSound(400, 700, 0.12);
             eyeLeft.style.transform = 'scaleY(0.1)';
             eyeRight.style.transform = 'scaleY(0.1)';
@@ -499,11 +480,9 @@
                 thinkingDots.style.display = 'flex';
                 responseBubble.classList.add('active');
                 
-                // تضييق الفم أثناء وضع التفكير
                 nanoMouth.style.width = '14px';
                 nanoMouth.style.height = '4px';
 
-                // تشغيل خوارزمية بناء الوعي
                 const finalReply = generateAdvancedResponse(currentInput);
 
                 setTimeout(() => {
@@ -511,12 +490,27 @@
                     responseText.innerText = finalReply;
                     responseText.style.display = 'block';
                     
-                    // صوت الإخراج المتوهج
                     playSynthSound(600, 950, 0.18);
                     
-                    // تشغيل أنيميشن التحدث المتفاعل مع طول الجملة
                     nanoMouth.style.animation = 'speaking 0.22s infinite ease-in-out';
                     const estimatedSpeakingTime = Math.min(finalReply.length * 60, 4500);
 
                     setTimeout(() => {
-                        nanoMouth.style.animatio
+                        nanoMouth.style.animation = 'none';
+                        nanoMouth.style.height = '5px';
+                        nanoMouth.style.width = '34px';
+                        nanoMouth.style.borderRadius = '10px';
+                    }, estimatedSpeakingTime);
+
+                }, 1400);
+
+            }, 250);
+        }
+
+        sendBtn.addEventListener('click', triggerSystemProcess);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') triggerSystemProcess();
+        });
+    </script>
+</body>
+</html>
